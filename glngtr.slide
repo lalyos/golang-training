@@ -24,16 +24,24 @@ Go is a new, general-purpose programming language.
 
 * Install
 
-brew install golang
+osx:
+
+	brew install golang
+
+linux:
+
+    apt-get install -y golang
+
 GOPATH (no need since 1.8)
 
 
-* GetGo
+* Alternative Install
 
 https://github.com/golang/tools/tree/master/cmd/getgo
 
 linux/osx:
-curl -sLo installer http://get.golang.org/installer_$(uname) && chmod +x installer && ./installer -i
+
+    curl -sLo installer http://get.golang.org/installer_$(uname) && chmod +x installer && ./installer -i
 
 * Test
 
@@ -47,20 +55,53 @@ curl -sLo installer http://get.golang.org/installer_$(uname) && chmod +x install
 - go env
 - go list
 - godoc [[http://localhost:6060/doc/]]
+- [[https://talks.golang.org/2014/hammers.slide#1][custom tools]]
+
+* Go List tricks
+
+get package json
+
+	go list -json
+
+print name and import path:
+
+	go list -f '{{.Name}} - {{.ImportPath}}'
+	
+find go package and cd:
+
+	gocd() { cd $(go list -e -f '{{.Dir}}' .../$1 2>/dev/null| head -1); }
+
+find main pachages on github:
+
+	go list -f '{{ if eq .Name "main" }}{{.Dir}}{{end}}' github.com/... 2>/dev/null
 
 * More tools
 
 present: [[https://godoc.org/golang.org/x/tools/present]]
 goimports: [[https://godoc.org/golang.org/x/tools/cmd/goimports]]
-xxx
 
 * Gocs
 
 [[https://godoc.org/github.com/hgfischer/go-otp][GoDoc]]
 [[https://sourcegraph.com/github.com/hgfischer/go-otp/-/blob/totp.go#L60:11][SourceGraph]]
 
+godoc in cli:
+
+	godoc os |grep -i env
+
+
 * presentation
 
 [[http://go-talks.appspot.com/github.com/owner/project/file.ext][go-talks]]
 [[http://deckdown.org/deck?src=https://gist.githubusercontent.com/lalyos/c1970b2d132ad403b00964307c132fad/raw/b3c1a04e75f01f35d181c83e63e609d010d8a118/test.md][deckdown]]
 [[https://gitpitch.com][gitpatch]]
+
+* readability
+
+- [[https://talks.golang.org/2014/readability.slide#27][Keep the normal code path at a minimal indentation]]
+- [[https://talks.golang.org/2013/bestpractices.slide#4][Avoid nesting by handling errors first]]
+- [[https://talks.golang.org/2014/readability.slide#41][Add comment]]
+- Prefer synchronous API to async API
+- Return error as error: don't panic
+
+
