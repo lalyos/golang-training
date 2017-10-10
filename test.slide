@@ -1,0 +1,66 @@
+Golang Tutorial
+Intro to golang
+9 Oct 2017
+Tags: foo, bar, baz
+
+Lalyos
+DevOps, SeholInc
+lalyos@yahoo.com
+Koszi!
+
+* Go the language
+
+See: [[https://talks.golang.org/2009/go_talk-20091030.pdf]]
+
+* What is Go?
+
+Go is a new, general-purpose programming language.
+
+- Compiled
+- Statically typed
+- Concurrent
+- Simple
+- Productive
+
+* Install
+
+brew install golang
+GOPATH (no need since 1.8)
+
+
+* GetGo
+
+https://github.com/golang/tools/tree/master/cmd/getgo
+
+linux/osx:
+curl -sLo installer http://get.golang.org/installer_$(uname) && chmod +x installer && ./installer -i
+
+* Test
+
+* Golang in browser
+
+[[https://play.golang.org]]
+[[https://www.katacoda.com/courses/golang/playground]]
+
+* Tools
+
+- go env
+- go list
+- godoc [[http://localhost:6060/doc/]]
+
+* More tools
+
+present: [[https://godoc.org/golang.org/x/tools/present]]
+goimports: [[https://godoc.org/golang.org/x/tools/cmd/goimports]]
+xxx
+
+* Gocs
+
+[[https://godoc.org/github.com/hgfischer/go-otp][GoDoc]]
+[[https://sourcegraph.com/github.com/hgfischer/go-otp/-/blob/totp.go#L60:11][SourceGraph]]
+
+* presentation
+
+[[http://go-talks.appspot.com/github.com/owner/project/file.ext][go-talks]]
+[[http://deckdown.org/deck?src=https://gist.githubusercontent.com/lalyos/c1970b2d132ad403b00964307c132fad/raw/b3c1a04e75f01f35d181c83e63e609d010d8a118/test.md][deckdown]]
+[[https://gitpitch.com][gitpatch]]
