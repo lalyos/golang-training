@@ -117,9 +117,79 @@ Most local variables use short version. `var` only used if explicit type needed
 
 `in, err := os.Open(file)`
 
+## Program Structure - Pointers
+
+Variables:
+- created by declaration: identified by its **name**
+- some are identified by only expressions: `x[i]`
+
+"A pointer value is the address of a variable"
+- with a pointer we can: **read/write** the value **indiriectly**
+
+declaration: `var x int`
+
+The expression `&x` : pointer to an integer variable
+
+its type is `*int`, pronounced as "pointer to int"
+
+`&` is called *address-of* operator
+
+## Program Structure - Pointers 2
+
+- zero value for pointer is `nil`
+- `p != nil` is true if p points to a var
+
+.iframe https://goplay.tools/snippet/G6Rki0g0yCM 400 800
+
+## Program Structure - Pointers 3
+
+**functions** can safely return **pointers to local** vars
+
+.iframe https://goplay.tools/snippet/CnykbY_cgo_M 400 800
+
+## Program Structure - Pointers 4
+
+Pointers are essential in the [flag](https://pkg.go.dev/flag) package
+
+
+.code log/main.go /START OMIT/,/END OMIT/
+
+## Program Structure - the new func
+
+- The expression `new(T)` creates an **unnamed** variable of type `T`
+- Initializes it with zero value of `T`
+- returns its address - type of `*T`
+
+//.iframe https://goplay.tools/snippet/Wmrw6mzKCBi 400 800
+
+.play slides/pointers.go /START1 OMIT/,/END1 OMIT/
+
+## Program Structure - the new func 2
+
+These functions have identical behaviors
+
+.code slides/pointers.go /START2 OMIT/,/END2 OMIT/
+
+.code slides/pointers.go /START3 OMIT/,/END3 OMIT/
+
+## 
 
 
 
+
+
+
+
+
+
+
+
+
+## Test 
+
+[goplay](https://goplay.tools/snippet/Kz-oE7lxDnF)
+
+.iframe https://goplay.tools/snippet/Kz-oE7lxDnF 500 800
 
 ## Basic Types
 
