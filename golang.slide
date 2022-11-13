@@ -1,0 +1,185 @@
+
+# Golang Tutorial
+Learn the go language
+15:04 1 Nov 2022
+Tags: foo, bar, baz
+Summary: This is a great document you want to read.
+
+lalyos
+Trainer, Consultant
+lalyos@yahoo.com
+cheers!
+
+## Myself
+
+- Long-time java developer - 1998
+- SequenceIQ - 2014
+- BanzaiCloud - 2017
+- Indy - 2018
+- [golang since 2014](https://github.com/moby/moby/pull/5396)
+- [GopherCon 2014 Making Docker GO](https://youtu.be/i26SYvVu1nw?t=654)
+
+## What is Go?
+
+Go is a new, general-purpose programming language.
+
+- (cross)Compiled
+- Statically typed
+- Concurrent
+- Simple
+- Productive
+
+See: [go_talk-20091030.pdf](https://talks.golang.org/2009/go_talk-20091030.pdf)
+
+## Golang in browser
+
+- [https://go.dev/play/](https://go.dev/play/)
+- [https://goplay.tools/](https://goplay.tools/)
+
+## Program Structure - Names
+
+- Names: `[letter|_][letter|_|digit]*`
+- Reserved:  [25 keywords](https://go.dev/ref/spec#Keywords) - goto ????
+- [Naming things](https://go.dev/talks/2014/names.slide#1)
+- [Effective Go](https://go.dev/doc/effective_go#names)
+
+## Program Structure - Predeclared identifiers
+
+- [Golang Spec](https://go.dev/ref/spec#Predeclared_identifiers) (not reserved):
+  - types: int, int8, float32, complex64, string, bool, byte, any ...
+  - constants: true false iota
+  - functions: append, close, copy, delete, len, make, new ...
+
+.play slides/predefined.go /^//START/,/^//END/
+
+## Program Structure - name visibility
+
+- If an entity is defined in func: it is **local** to that func
+- If outside of func: visible in all files of the pkg
+
+- Uppercase names are **exported**
+- package names are always lowercase
+
+## Program Structure - Declarations
+
+"A declaration **names** a program entity, and specifies some or all **properties**"
+
+Four major declarations:
+- var
+- const
+- type
+- func
+
+## Program Structure - Files
+
+Each program is stored in **xxx.go files**
+Each program starts with:
+
+- package declaration
+- import declaration(s)
+- package level declarations (in any order)
+  - var
+  - const
+  - type
+  - func
+
+## Program Structure - Variables
+
+A **var** declaration creates a variable of a **type**, attaches a name and sets **initial** value.
+
+`var name type = expression`
+
+either can be omitted (but not both)
+- `= expression` (zero value)
+- `type`
+
+zero value: 0, false, "", nil
+
+`var i, j, k int  // int, int, int`
+
+`var b, f, s = true, 2.3, "four"`
+
+## Program Structure - Short Variable Declaration
+
+**Within a function** an alternate form can be used:
+
+`name := expression`
+
+`i := 42`
+
+`x, y := 0, 1` // dont confuse with tuple assignment
+
+Most local variables use short version. `var` only used if explicit type needed
+
+`var boiling float64 = 0`
+
+**Note**: the short form doesn't necessarily declares all vars on the left side
+
+`in, err := os.Open(file)`
+
+
+
+
+
+## Basic Types
+
+[Integer Literals](https://goplay.tools/snippet/Kz-oE7lxDnF)
+
+.play -edit slides/integers.go
+
+## Tools
+
+- go env
+- go test
+- go list
+- godoc [http://localhost:6060/doc/](http://localhost:6060/doc/)
+- go version 
+`go version ~/go/bin`
+- [custom tools](https://talks.golang.org/2014/hammers.slide#1)
+
+## Go List tricks
+
+get package json
+
+	go list -json
+
+print name and import path:
+
+	go list -f '{{.Name}} - {{.ImportPath}}'
+	
+find go package and cd:
+
+	gocd() { cd $(go list -e -f '{{.Dir}}' .../$1 2>/dev/null| head -1); }
+
+find main pachages on github:
+
+	go list -f '{{ if eq .Name "main" }}{{.Dir}}{{end}}' github.com/... 2>/dev/null
+
+## More tools
+
+- [present](https://godoc.org/golang.org/x/tools/present)
+- [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports)
+- [gopls](https://pkg.go.dev/golang.org/x/tools/gopls)
+- [golangci-lint](https://github.com/golangci/golangci-lint)
+
+## Docs
+
+- [GoDoc - https://pkg.go.dev/](https://godoc.org/github.com/hgfischer/go-otp)
+- [SourceGraph](https://sourcegraph.com/github.com/hgfischer/go-otp/-/blob/totp.go#L60:11)
+
+godoc in cli:
+
+	go doc os |grep -i env
+
+-  Browser search engine [settings](chrome://settings/searchEngines)
+
+`go: https://pkg.go.dev/search?limit=25&m=package&q=%s`
+
+## Readability
+
+- [Keep the normal code path at a minimal indentation](https://talks.golang.org/2014/readability.slide#27)
+- [Avoid nesting by handling errors first](https://talks.golang.org/2013/bestpractices.slide#4)
+- [Add comment](https://talks.golang.org/2014/readability.slide#41)
+- Prefer synchronous API to async API
+- Return error as error: don't panic
+
