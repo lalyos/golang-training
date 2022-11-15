@@ -570,8 +570,13 @@ Go doesn't have a **set** type, but most of the time:
 
 .code slides/struct-point.go /func compair/,/^}/
 
-## Composit Types - Struct Embedding
+## Composit Types - Struct Embedding 1
 
+.code slides/struct-embed1.go /type Point/,/Printf/
+
+## Composit Types - Struct Embedding 2
+
+.code slides/struct-embed2.go /type Point/,/Printf/
 
 ## Tools
 
