@@ -1,0 +1,280 @@
+
+# Golang Tutorial
+Learn the go language
+15:04 1 Nov 2022
+Tags: foo, bar, baz
+Summary: This is a great document you want to read.
+
+lalyos
+Trainer, Consultant
+lalyos@yahoo.com
+cheers!
+
+## Myself
+
+- Long-time java developer - 1998
+- SequenceIQ - 2014
+- BanzaiCloud - 2017
+- Indy - 2018
+- [golang since 2014](https://github.com/moby/moby/pull/5396)
+- [GopherCon 2014 Making Docker GO](https://youtu.be/i26SYvVu1nw?t=654)
+
+## What is Go?
+
+Go is a new, general-purpose programming language.
+
+- (cross)Compiled
+- Statically typed
+- Concurrent
+- Simple
+- Productive
+
+See: [go_talk-20091030.pdf](https://talks.golang.org/2009/go_talk-20091030.pdf)
+
+## Golang in browser
+
+- [https://go.dev/play/](https://go.dev/play/)
+- [https://goplay.tools/](https://goplay.tools/)
+
+## Program Structure - Names
+
+- Names: `[letter|_][letter|_|digit]*`
+- Reserved:  [25 keywords](https://go.dev/ref/spec#Keywords) - goto ????
+- [Naming things](https://go.dev/talks/2014/names.slide#1)
+- [Effective Go](https://go.dev/doc/effective_go#names)
+
+## Program Structure - Predeclared identifiers
+
+- [Golang Spec](https://go.dev/ref/spec#Predeclared_identifiers) (not reserved):
+  - types: int, int8, float32, complex64, string, bool, byte, any ...
+  - constants: true false iota
+  - functions: append, close, copy, delete, len, make, new ...
+
+.play slides/predefined.go /^//START/,/^//END/
+
+## Program Structure - name visibility
+
+- If an entity is defined in func: it is **local** to that func
+- If outside of func: visible in all files of the pkg
+
+- Uppercase names are **exported**
+- package names are always lowercase
+
+## Program Structure - Declarations
+
+"A declaration **names** a program entity, and specifies some or all **properties**"
+
+Four major declarations:
+- var
+- const
+- type
+- func
+
+## Program Structure - Files
+
+Each program is stored in **xxx.go files**
+Each program starts with:
+
+- package declaration
+- import declaration(s)
+- package level declarations (in any order)
+  - var
+  - const
+  - type
+  - func
+
+## Program Structure - Variables
+
+A **var** declaration creates a variable of a **type**, attaches a name and sets **initial** value.
+
+`var name type = expression`
+
+either can be omitted (but not both)
+- `= expression` (zero value)
+- `type`
+
+zero value: 0, false, "", nil
+
+`var i, j, k int  // int, int, int`
+
+`var b, f, s = true, 2.3, "four"`
+
+## Program Structure - Short Variable Declaration
+
+**Within a function** an alternate form can be used:
+
+`name := expression`
+
+`i := 42`
+
+`x, y := 0, 1` // dont confuse with tuple assignment
+
+Most local variables use short version. `var` only used if explicit type needed
+
+`var boiling float64 = 0`
+
+**Note**: the short form doesn't necessarily declares all vars on the left side
+
+`in, err := os.Open(file)`
+
+## Program Structure - Pointers
+
+Variables:
+- created by declaration: identified by its **name**
+- some are identified by only expressions: `x[i]`
+
+"A pointer value is the address of a variable"
+- with a pointer we can: **read/write** the value **indiriectly**
+
+declaration: `var x int`
+
+The expression `&x` : pointer to an integer variable
+
+its type is `*int`, pronounced as "pointer to int"
+
+`&` is called *address-of* operator
+
+## Program Structure - Pointers 2
+
+- zero value for pointer is `nil`
+- `p != nil` is true if p points to a var
+
+.iframe https://goplay.tools/snippet/G6Rki0g0yCM 400 800
+
+## Program Structure - Pointers 3
+
+**functions** can safely return **pointers to local** vars
+
+.iframe https://goplay.tools/snippet/CnykbY_cgo_M 400 800
+
+## Program Structure - Pointers 4
+
+Pointers are essential in the [flag](https://pkg.go.dev/flag) package
+
+
+.code log/main.go /START OMIT/,/END OMIT/
+
+## Program Structure - the new func
+
+- The expression `new(T)` creates an **unnamed** variable of type `T`
+- Initializes it with zero value of `T`
+- returns its address - type of `*T`
+
+//.iframe https://goplay.tools/snippet/Wmrw6mzKCBi 400 800
+
+.play slides/pointers.go /START1 OMIT/,/END1 OMIT/
+
+## Program Structure - the new func 2
+
+These functions have identical behaviors
+
+.code slides/pointers.go /START2 OMIT/,/END2 OMIT/
+
+.code slides/pointers.go /START3 OMIT/,/END3 OMIT/
+
+`new` is not a keyword: can be redeclared 
+
+The `new` function is rarely used. See: *struct literal syntax*
+
+## Program Structure - Assignments
+
+The value held by a variable is update by an assignment statement.
+
+`x = 1`
+
+`*p = true`
+
+`person.name = "bob"`
+
+`count[x] = count[x] * scale`
+
+Each arithmetic and bitwise operator has a corresponding assignment operator
+
+`+=`, `-=`, `*=`, `/=`, `%=`,
+
+`x++` same as `x += 1` // note: no prefix
+
+## Program Structure - Tuple Assignment
+
+Swap x and y
+`x, y = y, x`
+
+all right hang side expression is evaluated before assignment
+
+Most usual
+
+`f, err = os.Open("foo.txt")`
+
+Note: this is not short variable declaration!
+
+## Program Structure - Assignability
+
+- explicit assignment
+- implicit:
+  - func call: arg -> param
+  - func return
+  - literal expression for composit type
+
+`medals := []string{"gold", "silver", "bronze"}`
+
+Assigmnet is **legal**  if the value is assignable to the type of the var.
+Constants have more flexible rules for assignability.
+
+## Program Structure - Type Declarations
+
+`type name underlying-type`
+
+Type declarations define a new named type that has the same underlying type as an existing type.
+
+`type Celsius Float64`
+
+`type Farenheit Float64`
+
+for every type `T` there is a **conversion operator** `T()`
+conersation is possible if both have the same underlying-type
+
+Comparison like `==`, or `<` can be used:
+- **named type** to another of the **same type**
+- **named type** to the **underlying-type**
+
+`fmt.Println(c == Celsius(f))` ???
+
+## Program Structure - Packages
+
+- Packages are "name spaces".
+- packages hide information: only `Uppercase` is **exported**
+
+## Program Structure - Imports
+
+Every package is identified by a unique string: **import path**
+Every package has a **name**. Short but not unique.
+
+See: `go list`
+
+The `import` declaration binds a short name to the imported package. Its used to refer
+to its content in the file.
+
+An `import` can define an **alternative** name to **avoid conflicts**
+
+## Program Structure - Package Initialization
+
+- package level vars
+- multiple files `*.go` are initialized in the order they were given to the compiler
+- package level `tables of data` vars are hard to initialize, therefore:
+
+`func init() { ... }`
+
+## Program Structure - Scope
+
+- Scope: compile-time part of the source code
+- Lifetime: runtime
+
+- A syntactic **block**: code enclosed in `{}`
+- lexical blocks are not surrounded by `{}`
+  - *universe* block: entire program
+  - every package
+  - every file
+  - every for / if / switch
+  - each case in switch / select
+
+`for`,`if` and `switch` declares 2 block: implicit and explicit
