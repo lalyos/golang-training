@@ -36,6 +36,15 @@ See: [go_talk-20091030.pdf](https://talks.golang.org/2009/go_talk-20091030.pdf)
 - [https://go.dev/play/](https://go.dev/play/)
 - [https://goplay.tools/](https://goplay.tools/)
 
+## Modules
+
+- [Program Structure](gl1-prog-struct.slide)
+- [Basic Types](gl2-basic-types.slide)
+- [Composite Types](gl3-composite-types.slide)
+- [Functions](gl4-functions.slide)
+- [Methods](gl5-methods.slide)
+- [Interfaces](gl6-interfaces.slide)
+
 ## Program Structure - Names
 
 - Names: `[letter|_][letter|_|digit]*`

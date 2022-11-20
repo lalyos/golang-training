@@ -1,40 +1,14 @@
 
 # Golang Tutorial
-Learn the go language
+Program Structure
 15:04 1 Nov 2022
-Tags: foo, bar, baz
-Summary: This is a great document you want to read.
+Tags: go, golang
+Summary: Golang tutorial.
 
 lalyos
 Trainer, Consultant
 lalyos@yahoo.com
 cheers!
-
-## Myself
-
-- Long-time java developer - 1998
-- SequenceIQ - 2014
-- BanzaiCloud - 2017
-- Indy - 2018
-- [golang since 2014](https://github.com/moby/moby/pull/5396)
-- [GopherCon 2014 Making Docker GO](https://youtu.be/i26SYvVu1nw?t=654)
-
-## What is Go?
-
-Go is a new, general-purpose programming language.
-
-- (cross)Compiled
-- Statically typed
-- Concurrent
-- Simple
-- Productive
-
-See: [go_talk-20091030.pdf](https://talks.golang.org/2009/go_talk-20091030.pdf)
-
-## Golang in browser
-
-- [https://go.dev/play/](https://go.dev/play/)
-- [https://goplay.tools/](https://goplay.tools/)
 
 ## Program Structure - Names
 

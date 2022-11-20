@@ -1,0 +1,153 @@
+# Golang Tutorial
+Basic Types
+15:04 1 Nov 2022
+Tags: go, golang
+Summary: Golang tutorial.
+
+lalyos
+Trainer, Consultant
+lalyos@yahoo.com
+cheers!
+
+## Basic Types - Overview
+
+Go Type system:
+- Basic types
+  - numbers
+  - strings
+  - boolean
+- Aggregate types
+  - arrays
+  - structs
+- Reference types (pointer,slice,map,function,chan)
+- Interface types
+
+## Basic Types - Integer 1
+Numbers:
+- integer
+  - signed (8/16/32/64)
+  - unsigned (8/16/32/64)
+- floating (32/64)
+- complex (64/128)
+
+aliases
+
+- byte - alias for uint8
+- rune - alias for int32
+
+## Basic Types - Integer 2
+
+Predeclared integer types with implementation-specific sizes:
+
+- uint     either 32 or 64 bits
+- int      same size as uint
+- uintptr  an unsigned integer large enough to store the uninterpreted bits of a pointer value
+
+## Basic Types - Integer 3
+
+Conversion
+
+float -> int : truncation
+
+.iframe https://goplay.tools/snippet/e9l_bm_fw-_l 400 800
+
+## Basic Types - Integer Literals
+
+- decimal `42`  
+- octal `0644`
+- hexa `0xFF`
+
+`fmt.Printf` can control how to print numbers
+
+.iframe https://goplay.tools/snippet/_EdJ95hr0qH 300 800
+
+## Basic Types - Integer Literals 2
+
+[Integer Literals](https://goplay.tools/snippet/Kz-oE7lxDnF)
+
+.play -edit slides/integers.go
+
+## Basic Types - Floating-Point Numbers
+
+- float32 
+- float64
+
+constants:
+- MaxFloat32
+- SmallestNonzeroFloat32
+- MaxFloat64
+- SmallestNonzeroFloat64
+
+Literals are writen with decimals
+`const pi = 3.14`
+
+Digits can be omited before/after decimal `.5`, `3.`
+
+## Basic Types - Complex Numbers
+
+.iframe https://goplay.tools/snippet/arYdCpYk3x9 500 800
+ 
+## Basic Types - Booleans
+
+Has 2 values
+- true
+- false
+
+Boolean values can be combined with `&&` and `||`. 
+
+They have *short-circuit* behavior.
+
+There is no conversion between `int` and `bool`
+
+Write `itob` and `btoi` if needed
+
+## Basic Types - Strings
+
+"Immutable sequence of bytes"
+- `len()` returns the **size in bytes** not in rune
+- index operation `str[3]` returns byte
+
+.iframe https://goplay.tools/snippet/lVpDfsMDbyA 400 800
+
+## Basic Types - String Literals
+
+- String literal "some string\nmulti line"
+- Raw String Literal
+
+.play slides/strings.go
+
+## Basic Types - UTF8
+
+- go source files are always utf8.
+- utf8: variable length encoding (max 4 bytes)
+  - ascii: 1 byte
+  - common chars: 2-3 bytes
+
+- `len()` count bytes
+- [utf8.RuneCountInString()](https://pkg.go.dev/unicode/utf8#RuneCountInString)
+- range loop uses rune
+
+## Basic Types - Strings and BS
+
+4 important packages:
+- [bytes](https://pkg.go.dev/bytes): string are immutable bytes.Buffer
+- [strings](https://pkg.go.dev/strings): split,join,replace,...
+- [strconv](https://pkg.go.dev/strconv)
+  provides: bool, int, float conversions
+- [unicode](https://pkg.go.dev/unicode) IsDigit,IsLetter,IsUpper,IsLower
+
+## Basic Types - String Num Converstion
+
+.iframe https://goplay.tools/snippet/FyzISw9vGnw 500 800
+
+## Basic Types - Constants
+
+boolean, string, number values is known at compile time
+
+`const pi = 3.1415` inferred type
+
+.iframe https://goplay.tools/snippet/1ppSabC9Z6T 450 800
+
+## Basic Types - iota
+
+.iframe https://goplay.tools/snippet/PtmBRceKQls 500 800

@@ -1,0 +1,166 @@
+# Golang Tutorial
+Composite Types
+15:04 1 Nov 2022
+Tags: go, golang
+Summary: Golang tutorial.
+
+lalyos
+Trainer, Consultant
+lalyos@yahoo.com
+cheers!
+
+## Composit Types - Arrays
+
+"Fixed-length seq of 0 or more elements of a type"
+
+.iframe https://goplay.tools/snippet/Q_5YONmFVvj 500 800
+
+## Composit Types - Arrays comparison
+
+arrays are comparable
+
+- The element type should be comparable
+- size of array should match
+
+See: previous sample
+
+## Composit Types - Slices
+
+"Variable-length seq whose elements have the same type"
+
+slice of T is defined as: `[]T`
+- `[]int`
+- `[]string`
+- `[]Weekday`
+
+Create with built-in:
+`func make([]T, len, cap) []T`
+
+Create with literal: `letters := []string{"a", "b", "c", "d"}`
+
+## Composit Types - Slices Operator
+
+Create from array with a [slice operator/expression](https://go.dev/ref/spec#Slice_expressions): `a[low:hight]`
+
+0 <= low <= high <= cap()
+- elements from **low** to **high-1**
+- len() = high - low
+
+low,high or both can be omitted
+- low: defaults to 0
+- hifgh: defaults to len()
+
+`a[1:] a[:3] a[:]`
+
+wtf: `a[1:2:3]`
+
+## Composit Types - Slices Operator
+
+How about pointer to an array?
+
+See: [lang spec](https://go.dev/ref/spec#Slice_expressions)
+
+## Composit Types - Slices Exercises
+
+Under the hood, a slice has:
+- data
+- len
+- cap
+
+References:
+
+- [SliceTricks](https://github.com/golang/go/wiki/SliceTricks)
+- [SliceTricks visual](https://ueokande.github.io/go-slice-tricks/)
+- [Go Slices: usage and internals](https://go.dev/blog/slices-intro)
+
+## Composit Types - append
+
+`s = append(s, "next")`
+
+How append changes: `size()` and `cap()`?
+
+Let's find out ...
+
+## Composit Types - in-place
+
+- In-place rotate
+- In-place reverse
+
+## Composit Types - Maps
+
+"Unordered collection of key values" - hashtable
+What is a hash function?
+
+`map[K]V`
+- `K` and `V` can be different
+- type `K` must be comparable with `==` (don't float!)
+
+Declared with built-in:
+`ages = make(map[string]int)`
+
+With **map-literal**
+
+.code slides/maps.go /func/,/}/
+
+## Composit Types - Maps 2
+
+- `delete` removes an element
+- `len()` descrease
+
+shorthand:
+- `ages["vladimir"] = ages["vladimir"] + 1`
+- `ages["vladimir"] += 1`
+- `ages["vladimir"] ++`
+
+but: `p = &ages["vladimir"]`
+
+Note: map element is not a variable
+
+## Composit Types - Maps 3
+
+`range` gives the keys in unspecified order
+
+- zero value for map is `nil`
+- delete/len/range are safe on `nil` map
+- storing to `nil` map panics
+
+*subscripting* `ages["bob"]` always yields a value (zero val for T)
+
+If it's not sufficiernt use:
+`age, ok := ages["bob"]` followed by a `if !ok {}`
+
+## Composit Types - Maps - sets
+
+Go doesn't have a **set** type, but most of the time:
+
+`map[string]bool` is what you need
+
+
+## Composit Types - Structs
+
+"Struct is aggregated type, that **groups** 0 or more **named values**"
+
+.code slides/struct.go /Employee/,/}/
+
+- dot notation works for a pointer
+
+## Composit Types - Struct Literals
+
+- declare **all** fields in order (works for simple)
+- declare some fields with name and value
+
+.play slides/struct-point.go /func main/,/fmt.Println/
+
+## Composit Types - Cpompairing Struct
+
+"If all fields of a struct are comparable, the struct is comparable"
+
+.code slides/struct-point.go /func compair/,/^}/
+
+## Composit Types - Struct Embedding 1
+
+.code slides/struct-embed1.go /type Point/,/Printf/
+
+## Composit Types - Struct Embedding 2
+
+.code slides/struct-embed2.go /type Point/,/Printf/

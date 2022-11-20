@@ -1,0 +1,15 @@
+# Golang Tutorial
+Interfaces
+15:04 1 Nov 2022
+Tags: go, golang
+Summary: Golang tutorial.
+
+lalyos
+Trainer, Consultant
+lalyos@yahoo.com
+cheers!
+
+## Interfaces - Exercise 1
+
+- Implement an io.Writer which only counts: [goplay template](https://goplay.tools/snippet/aA8UUfgGslR)
+
