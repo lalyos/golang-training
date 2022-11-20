@@ -386,6 +386,7 @@ pre.numbers span:before {
   display: inline-block;
 }
 
+/* modified */
 code {
   font-size: 95%;
   font-family: 'Droid Sans Mono', 'Courier New', monospace;
