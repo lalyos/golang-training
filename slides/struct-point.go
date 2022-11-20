@@ -26,5 +26,5 @@ func main() {
 	}
 	p6 := &Point{3, 3}
 	fmt.Println(p1, p2, p3, p4, p5, p6)
-	//compair()
+	compair()
 }
