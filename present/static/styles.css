@@ -237,6 +237,10 @@
     overflow: hidden;
   }
 
+  h3:first-child {
+    padding: 50px 20px !important;
+    background-color: rgb(197, 197, 197);
+  }
   h2 {
     position: static !important;
     margin-top: 400px !important;
