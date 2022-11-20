@@ -223,6 +223,7 @@
 
   body {
     display: block !important;
+    -webkit-print-color-adjust: exact !important;
   }
 
   .slides > article {
@@ -244,6 +245,13 @@
 
   div.code {
     background: rgb(240, 240, 240);
+  }
+
+  code {
+    font-size: 95%;
+    font-family: 'Droid Sans Mono', 'Courier New', monospace;
+    background: #e6e6e6;
+    padding: 0px 10px 0 10px;
   }
 
   /* Add explicit links */
